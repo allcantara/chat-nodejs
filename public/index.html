@@ -15,12 +15,12 @@
     <form id="chat">
         <input type="text" name="username" placeholder="Informe seu usuário..." />
         <div class="messages"></div>
-        <input type="text" name="message" placeholder="Digite aqui sua mensagem..." />
+        <input type="text" name="message" id="message" placeholder="Digite aqui sua mensagem..." />
         <button type="submit">ENVIAR</button>
     </form>
 
     <script text="text/javascript">
-        const socket = io('http://localhost:3000')
+        const socket = io('https://3000-b77a32aa-e351-40f6-af81-842e7b795d64.ws-us02.gitpod.io/')
         const color = randomColor()
 
         const renderMessage = ({ author, message, color }) => {
@@ -44,7 +44,7 @@
             var author = $('input[name=username]').val()
             var message = $('input[name=message]').val()
 
-            if(author.length && message.length) {
+            if(author.length && author.length < 15 && message.length) {
                 var messageObject = {
                     author,
                     message,
@@ -52,6 +52,10 @@
                 }
                 socket.emit('sendMessage', messageObject)
                 renderMessage(messageObject)
+
+                document.querySelector('#message').value = ""
+            } else {
+                alert('Nome muito grande!')
             }
         })
 

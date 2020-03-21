@@ -39,6 +39,7 @@ button {
 .messages {
   width: 600px;
   height: 400px;
+  overflow: auto;
   margin: 20px 0;
   border: 1px solid #ddd;
   padding: 20px;
